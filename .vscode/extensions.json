@@ -1,0 +1,13 @@
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "naumovs.color-highlight",
+    "evondev.dracula-high-contrast",
+    "kisstkondoros.vscode-gutter-preview",
+    "streetsidesoftware.code-spell-checker-vietnamese",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "steoates.autoimport",
+    "PKief.material-icon-theme"
+  ]
+}

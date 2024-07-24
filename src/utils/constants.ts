@@ -1,0 +1,21 @@
+import {Platform} from 'react-native';
+
+export const BUILD_VERSION = '1430.2307';
+
+export const IS_IOS = Platform.OS === 'ios';
+
+export const PHONE_REGEX = /^(84|0)(3|5|7|8|9)([0-9]{8})$/;
+
+export const EMAIL_REGEX =
+  /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
+
+export const APP_INFO = {
+  androidBundleId: 'com.ims.sky',
+  iosBundleId: 'com.imsvietnamese.sky',
+  iosAppStoreId: '6475276823',
+} as const;
+
+export const INSTALL_APP_URL = Platform.select({
+  android: `https://play.google.com/store/apps/details?id=${APP_INFO.androidBundleId}`,
+  ios: `itms-apps://itunes.apple.com/app/${APP_INFO.iosAppStoreId}`,
+}) as string;

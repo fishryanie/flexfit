@@ -1,0 +1,39 @@
+{
+  "workbench.colorTheme": "Evondev Dracula Normal Contrast",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 15,
+  "editor.lineHeight": 40,
+  "terminal.integrated.fontSize": 14,
+  "material-icon-theme.activeIconPack": "react_redux",
+  "git.confirmSync": false,
+  "color-highlight.markerType": "dot-before",
+  "files.associations": {
+    "*.js": "javascriptreact"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  "workbench.startupEditor": "none",
+  "files.autoSave": "afterDelay",
+  "cSpell.words": [
+    "Entypo",
+    "Fontisto",
+    "netinfo",
+    "persistor",
+    "pollopt",
+    "Pressable",
+    "Reactotron",
+    "Signin",
+    "Zocial"
+  ]
+}
