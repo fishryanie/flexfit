@@ -5,3 +5,5 @@
 // export * from './CodePushProgressDialog';
 // export * from '../modal/ModalLoginExpired';
 // export * from './SocialConnect';
+
+export * from './ButtonDarkMode';

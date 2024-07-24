@@ -77,7 +77,7 @@
 //             {loading ? (
 //               <ActivityIndicator size="small" color={colorTitle} />
 //             ) : (
-//               <Text font="medium" fontSize={fontSize} color={colorTitle}>
+//               <Text fontWeight="medium" fontSize={fontSize} color={colorTitle}>
 //                 {title}
 //               </Text>
 //             )}

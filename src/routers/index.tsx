@@ -16,7 +16,7 @@ export default function Routes() {
   const dispatch = useAppDispatch();
 
   const handleReadyNavigation = () => {
-    dispatch(readyNavigate(true));
+    // dispatch(readyNavigate(true));
   };
 
   useFCMToken();

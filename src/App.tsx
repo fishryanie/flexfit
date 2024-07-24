@@ -13,15 +13,15 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} loading={null}>
-        <SafeAreaProvider>
-          <BottomSheetModalProvider>
-            <GestureHandlerRootView style={{flex: 1}}>
-              <PortalProvider>
+        <BottomSheetModalProvider>
+          <GestureHandlerRootView style={{flex: 1}}>
+            <PortalProvider>
+              <SafeAreaProvider>
                 <Routes />
-              </PortalProvider>
-            </GestureHandlerRootView>
-          </BottomSheetModalProvider>
-        </SafeAreaProvider>
+              </SafeAreaProvider>
+            </PortalProvider>
+          </GestureHandlerRootView>
+        </BottomSheetModalProvider>
       </PersistGate>
     </Provider>
   );
