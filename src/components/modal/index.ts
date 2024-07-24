@@ -1,2 +1,2 @@
-export * from './ModalUpdateApp';
+// export * from './ModalUpdateApp';
 export * from './ModalInternetOffline';

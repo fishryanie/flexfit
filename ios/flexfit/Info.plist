@@ -31,12 +31,18 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Cho phép ${PRODUCT_NAME} sử dụng máy ảnh để thay đổi ảnh đại diện</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Vị trí của bạn cho phép ${PRODUCT_NAME} xác định chính xác địa điểm tập luyện</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<string>Vị trí của bạn cho phép ${PRODUCT_NAME} xác định chính xác địa điểm tập luyện</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Vị trí của bạn cho phép ${PRODUCT_NAME} xác định chính xác địa điểm tập luyện</string>
+	<key>MinimumOSVersion</key>
+    <string>14.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>

@@ -56,6 +56,7 @@ export type BlockProps = ViewProps &
     bottom: Size;
     left: Size;
     absoluteFillObject: boolean;
+    gap: ViewStyle['gap'];
     width: Size;
     height: Size;
     maxWidth: Size;
@@ -124,6 +125,7 @@ export const Block = forwardRef(
       bottom,
       left,
       absoluteFillObject,
+      gap,
       width,
       height,
       maxWidth,
@@ -211,6 +213,7 @@ export const Block = forwardRef(
       maxHeight !== undefined ? {maxHeight: hs(maxHeight)} : undefined,
       minWidth !== undefined ? {minWidth: hs(minWidth)} : undefined,
       minHeight !== undefined ? {minHeight: hs(minHeight)} : undefined,
+      gap !== undefined ? {gap: hs(gap)} : undefined,
       //
       StyleSheet.flatten(style),
     ];

@@ -7002,6 +7002,7 @@ __metadata:
     react-native-keyboard-aware-scroll-view: ^0.9.5
     react-native-linear-gradient: ^2.8.3
     react-native-mmkv: ^2.12.2
+    react-native-permissions: ^4.1.5
     react-native-qrcode-svg: ^6.3.1
     react-native-reanimated: ^3.14.0
     react-native-reanimated-carousel: ^3.5.1
@@ -7013,7 +7014,7 @@ __metadata:
     react-native-svg: ^15.4.0
     react-native-toast-message: ^2.2.0
     react-native-vector-icons: ^10.1.0
-    react-native-vision-camera: ^4.5.0
+    react-native-vision-camera: 4.5.0
     react-redux: ^9.1.2
     react-test-renderer: 18.2.0
     reactotron-react-native: ^5.1.7
@@ -10807,6 +10808,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-native-permissions@npm:^4.1.5":
+  version: 4.1.5
+  resolution: "react-native-permissions@npm:4.1.5"
+  peerDependencies:
+    react: ">=18.1.0"
+    react-native: ">=0.70.0"
+    react-native-windows: ">=0.70.0"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: dc4b366a0f561a47f032c027eb703a2be45e801788b915ed583e38f617eea23656eb63a77b17fb3a663fe3199b2ec25788f799e751421634e35a64f5258feed9
+  languageName: node
+  linkType: hard
+
 "react-native-qrcode-svg@npm:^6.3.1":
   version: 6.3.1
   resolution: "react-native-qrcode-svg@npm:6.3.1"
@@ -10955,7 +10970,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-vision-camera@npm:^4.5.0":
+"react-native-vision-camera@npm:4.5.0":
   version: 4.5.0
   resolution: "react-native-vision-camera@npm:4.5.0"
   peerDependencies:
