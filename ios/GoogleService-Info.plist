@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAeb8E5t-Xru48KjcnySgJKGhMQ51p5pAg</string>
+	<key>GCM_SENDER_ID</key>
+	<string>635560080656</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ryan.flexfit</string>
+	<key>PROJECT_ID</key>
+	<string>flexfit-fc1cd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flexfit-fc1cd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:635560080656:ios:a2041a49ecca538bfd6195</string>
+</dict>
+</plist>

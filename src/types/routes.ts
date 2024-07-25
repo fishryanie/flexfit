@@ -1,4 +1,3 @@
-import {NavigatorScreenParams} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeStackScreenProps<RootStackParamList, T>;
@@ -7,13 +6,14 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeSta
 
 export type BottomTabParamList = {
   BottomHomeScreen: undefined;
-  BottomProductScreen?: undefined;
+  BottomPlanScreen?: undefined;
   BottomNotifyScreen: undefined;
   BottomOrderScreen?: undefined;
   BottomProfileScreen: undefined;
 };
 
 export type RootStackParamList = {
+  DrawerWrapper: undefined;
   HomeScreen: undefined;
 
   SettingScreen: undefined;

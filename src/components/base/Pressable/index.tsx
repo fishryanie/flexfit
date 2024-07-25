@@ -1,8 +1,8 @@
 import React, {Ref, forwardRef, useCallback, useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { handleFlex, handleRound, handleSquare, hs } from 'themes/helper';
-import { DEFAULT_STYLES } from 'themes/defaultStyles';
-import { Size } from 'types/common';
+import {handleFlex, handleRound, handleSquare, hs} from 'themes/helper';
+import {DEFAULT_STYLES} from 'themes/defaultStyles';
+import {Size} from 'types/common';
 import {
   ColorValue,
   GestureResponderEvent,
@@ -11,7 +11,6 @@ import {
   TouchableOpacityProps,
   ViewStyle,
 } from 'react-native';
-
 
 export type PressableProps = TouchableOpacityProps &
   Partial<{
@@ -23,6 +22,7 @@ export type PressableProps = TouchableOpacityProps &
     alignItems: ViewStyle['alignItems'];
     justifyContent: ViewStyle['justifyContent'];
     alignSelf: ViewStyle['alignSelf'];
+    gap: ViewStyle['gap'];
     zIndex: number;
     padding: Size;
     paddingHorizontal: Size;
@@ -92,6 +92,7 @@ export const Pressable = forwardRef(
       justifyContent,
       alignSelf,
       zIndex,
+      gap,
       padding,
       paddingHorizontal,
       paddingVertical,
@@ -168,6 +169,8 @@ export const Pressable = forwardRef(
       backgroundColor !== undefined ? {backgroundColor} : undefined,
       opacity !== undefined ? {opacity} : undefined,
       transform !== undefined ? {transform} : undefined,
+      gap !== undefined ? {gap: hs(gap)} : undefined,
+
       //
       padding !== undefined ? {padding: hs(padding)} : undefined,
       paddingVertical !== undefined ? {paddingVertical: hs(paddingVertical)} : undefined,

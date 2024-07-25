@@ -7,6 +7,7 @@ export const COLORS = {
   textPrimary: '#434343',
   textPlaceholder: '#808080',
   electricRed: '#E50000',
+  chineseOrange: '#f47a3c',
   antiFlashWhite: '#F1F1F1',
   border: '#ccc',
 

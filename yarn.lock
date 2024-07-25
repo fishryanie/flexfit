@@ -7008,6 +7008,7 @@ __metadata:
     react-native-fast-image: ^8.6.3
     react-native-geolocation-service: ^5.3.1
     react-native-gesture-handler: ^2.17.1
+    react-native-gifted-charts: ^1.4.19
     react-native-image-crop-picker: ^0.41.2
     react-native-image-viewing: ^0.2.2
     react-native-keyboard-aware-scroll-view: ^0.9.5
@@ -7311,6 +7312,16 @@ __metadata:
     debug: ^4.3.4
     fs-extra: ^11.2.0
   checksum: 3eda448a59fa1ba82ad4f252e58490fec586b644f2dc9c98ba3ab20e801ecc8a1bc1784829c474c9d188edb633d4dfd81c33894ca6117a33a16e8e013b41b40f
+  languageName: node
+  linkType: hard
+
+"gifted-charts-core@npm:^0.1.18":
+  version: 0.1.18
+  resolution: "gifted-charts-core@npm:0.1.18"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 086cc3415c382f3b5f671444eefa1b88ffdca888dad6230b3d84650ed904ee77e7c68a334e25b818e9cb93c130b86a932da2dcdb8a689b27ce9ef0727144348f
   languageName: node
   linkType: hard
 
@@ -10756,6 +10767,26 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 70da4fc51d92899591aadf03396a8e0b78223fbe71da5b10e76232058c1ef5943d54c1dd8da815d5b6a8b41f259ea9d50457680e2ef7878c88d7396771170ae3
+  languageName: node
+  linkType: hard
+
+"react-native-gifted-charts@npm:^1.4.19":
+  version: 1.4.19
+  resolution: "react-native-gifted-charts@npm:1.4.19"
+  dependencies:
+    gifted-charts-core: ^0.1.18
+  peerDependencies:
+    expo-linear-gradient: "*"
+    react: "*"
+    react-native: "*"
+    react-native-linear-gradient: "*"
+    react-native-svg: "*"
+  peerDependenciesMeta:
+    expo-linear-gradient:
+      optional: true
+    react-native-linear-gradient:
+      optional: true
+  checksum: 2a44982f5b1f631195e33acace4179c35ec89bd2315e11967ceff1552db858d0293d9ea91b148b5b0c11334f05cd6948cccdf6b10bfafe388de453e30794d95f
   languageName: node
   linkType: hard
 

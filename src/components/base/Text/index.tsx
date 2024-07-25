@@ -1,5 +1,6 @@
 import React from 'react';
 import {ColorValue, Text as RNText, TextProps as RNTextProps, StyleSheet, TextStyle} from 'react-native';
+import {COLORS} from 'themes/color';
 // import {COLORS} from 'themes/color';
 import {fs, handleFlex, hs} from 'themes/helper';
 import {Size} from 'types/common';
@@ -80,7 +81,7 @@ export const Text = ({
   minHeight,
   opacity,
   transform,
-  // color = COLORS.raisinBlack,
+  color = COLORS.textPrimary,
   fontSize = 14,
   fontWeight,
   // font = 'regular',
@@ -93,7 +94,7 @@ export const Text = ({
   const _style = [
     {
       includeFontPadding: false,
-      // color,
+      color,
       fontSize: fs(fontSize),
       fontWeight: fontWeight,
       // fontFamily: FontBeVietnamPro[font],

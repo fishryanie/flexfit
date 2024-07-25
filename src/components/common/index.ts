@@ -1,4 +1,4 @@
-// export * from './Avatar';
+export * from './Avatar';
 // export * from './BottomSheetBackdrop';
 // export * from './BottomButton';
 // export * from './EmptyData';

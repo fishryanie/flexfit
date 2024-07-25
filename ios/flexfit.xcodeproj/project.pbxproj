@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1449CD16E8AF5A2C6BE565ED /* Pods_flexfit_flexfitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11D097A6B9F86C9DADADB544 /* Pods_flexfit_flexfitTests.framework */; };
+		6237FC522C525AE00082EDEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6237FC512C525AE00082EDEF /* GoogleService-Info.plist */; };
 		72FABC83D60BE4B739FDD720 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 2CF292AAA24D2CC30221DD77 /* PrivacyInfo.xcprivacy */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EB78592D0597ABE6C0635725 /* Pods_flexfit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC209E2AE5853E8FDEBB88B1 /* Pods_flexfit.framework */; };
@@ -43,6 +44,7 @@
 		3B4392A12AC88292D35C810B /* Pods-flexfit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flexfit.debug.xcconfig"; path = "Target Support Files/Pods-flexfit/Pods-flexfit.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-flexfit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flexfit.release.xcconfig"; path = "Target Support Files/Pods-flexfit/Pods-flexfit.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-flexfit-flexfitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flexfit-flexfitTests.debug.xcconfig"; path = "Target Support Files/Pods-flexfit-flexfitTests/Pods-flexfit-flexfitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6237FC512C525AE00082EDEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = flexfit/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-flexfit-flexfitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flexfit-flexfitTests.release.xcconfig"; path = "Target Support Files/Pods-flexfit-flexfitTests/Pods-flexfit-flexfitTests.release.xcconfig"; sourceTree = "<group>"; };
 		BC209E2AE5853E8FDEBB88B1 /* Pods_flexfit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flexfit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +123,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				6237FC512C525AE00082EDEF /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* flexfit */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* flexfitTests */,
@@ -248,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				6237FC522C525AE00082EDEF /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				72FABC83D60BE4B739FDD720 /* PrivacyInfo.xcprivacy in Resources */,
 			);
@@ -502,7 +506,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1721900626;
 				DEVELOPMENT_TEAM = 8Z62SAZ6RK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = flexfit/Info.plist;
@@ -539,7 +543,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 1721900626;
 				DEVELOPMENT_TEAM = 8Z62SAZ6RK;
 				INFOPLIST_FILE = flexfit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -650,10 +654,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -736,10 +737,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

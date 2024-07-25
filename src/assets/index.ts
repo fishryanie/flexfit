@@ -8,6 +8,8 @@ export const ICONS = {
   ic_toastErrorIcon: require('./icons/toastErrorIcon.png'),
   ic_toastSuccessIcon: require('./icons/toastSuccessIcon.png'),
   ic_toastWarningIcon: require('./icons/toastWarningIcon.png'),
+  ic_bottomHome: 'https://cdn-icons-png.flaticon.com/128/2173/2173841.png',
+  ic_bottomPlan: 'https://cdn-icons-png.flaticon.com/128/13564/13564709.png',
 };
 
 export const IMAGES = {};

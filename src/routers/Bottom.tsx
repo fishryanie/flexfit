@@ -4,8 +4,9 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BottomTabParamList} from 'types/routes';
 import {hs} from 'themes/helper';
 import {COLORS} from 'themes/color';
-import {Icon} from 'components/base';
+import {Icon, Image} from 'components/base';
 import HomeScreen from 'screens/bottom/HomeScreen';
+import {ICONS} from 'assets';
 
 type TypeDataActivityBookingTap = {
   label: string;
@@ -46,8 +47,14 @@ export default function Bottom() {
 const data: TypeDataActivityBookingTap[] = [
   {
     name: 'BottomHomeScreen',
-    label: 'bottom.home',
+    label: 'Home',
     screen: HomeScreen,
-    icon: ({color}) => <Icon type="FontAwesome5" name="user-circle" color={color} />,
+    icon: ({size}) => <Image source={{uri: ICONS.ic_bottomHome}} square={size} />,
+  },
+  {
+    name: 'BottomPlanScreen',
+    label: 'Plan',
+    screen: HomeScreen,
+    icon: ({size}) => <Image source={{uri: ICONS.ic_bottomPlan}} square={size} />,
   },
 ];
