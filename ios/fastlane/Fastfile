@@ -1,0 +1,34 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Description of what the lane does"
+  lane :distribute do
+    build_app(
+      scheme: "flexfit",
+      workspace: "flexfit.xcworkspace",
+      # include_bitcode: true,
+      # export_method: "development"
+    )
+    firebase_app_distribution(
+      app: "1:635560080656:ios:a2041a49ecca538bfd6195",
+      firebase_cli_token: "1//0eq3wVwNxe2SlCgYIARAAGA4SNwF-L9IrahAQmqYhfpmTGKhQt6skynwfhfe23mgBMBezfVATasUwWqhSt1Mao72STN9DYBmI2Wo",
+      testers: "qphanquan198@gmail.com",
+      release_notes: "Lots of amazing new features to test out!"
+    )
+  end
+end
