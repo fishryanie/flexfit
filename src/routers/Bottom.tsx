@@ -5,8 +5,9 @@ import {BottomTabParamList} from 'types/routes';
 import {hs} from 'themes/helper';
 import {COLORS} from 'themes/color';
 import {Icon, Image} from 'components/base';
-import HomeScreen from 'screens/bottom/HomeScreen';
 import {ICONS} from 'assets';
+import HomeScreen from 'screens/bottom/HomeScreen';
+import PlanScreen from 'screens/bottom/PlanScreen';
 
 type TypeDataActivityBookingTap = {
   label: string;
@@ -54,7 +55,7 @@ const data: TypeDataActivityBookingTap[] = [
   {
     name: 'BottomPlanScreen',
     label: 'Plan',
-    screen: HomeScreen,
+    screen: PlanScreen,
     icon: ({size}) => <Image source={{uri: ICONS.ic_bottomPlan}} square={size} />,
   },
 ];

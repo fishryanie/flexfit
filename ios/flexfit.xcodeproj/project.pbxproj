@@ -600,7 +600,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: qphanquan1998@gmail.com (S97N7XJ82P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: qphanquan1998@gmail.com (S97N7XJ82P)";
 				COPY_PHASE_STRIP = NO;
 				CXX = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -691,7 +692,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "Apple Development: qphanquan1998@gmail.com (S97N7XJ82P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: qphanquan1998@gmail.com (S97N7XJ82P)";
 				COPY_PHASE_STRIP = YES;
 				CXX = "";
 				ENABLE_NS_ASSERTIONS = NO;

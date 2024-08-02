@@ -17,4 +17,6 @@ export * from './Shimmer';
 export * from './StatusBar';
 export * from './Text';
 export * from './TextInput';
+export * from './WheelNumberPicker';
+
 // export * from './List';
