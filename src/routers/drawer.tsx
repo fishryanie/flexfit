@@ -1,9 +1,9 @@
 import React from 'react';
 import drawer from 'screens/drawer';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {RootStackParamList} from 'types/routes';
+import {DrawerStackParamList} from 'types/routes';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<DrawerStackParamList>();
 
 export default function GroupDrawer() {
   return (

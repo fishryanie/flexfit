@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BlockProps, Icon, Image, Pressable, Text} from 'components/base';
+import {Block, BlockProps, Icon, Image, Text} from 'components/base';
 import {ResizeMode} from 'react-native-fast-image';
 import {COLORS} from 'themes/color';
 
@@ -19,7 +19,6 @@ export const Avatar = ({
   fontDecrease = 3.5,
   resizeMode = 'cover',
   backgroundColor = COLORS.primary,
-  onPress,
   ...props
 }: AvatarProps & BlockProps) => {
   const [loadFailed, setLoadFailed] = useState(false);
@@ -44,9 +43,9 @@ export const Avatar = ({
   };
 
   return (
-    <Pressable round={size} contentCenter backgroundColor={bgColor} {...props} onPress={onPress}>
+    <Block round={size} contentCenter backgroundColor={bgColor} {...props}>
       {_renderInner()}
-    </Pressable>
+    </Block>
   );
 };
 

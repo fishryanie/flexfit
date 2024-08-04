@@ -7,6 +7,8 @@ import {Avatar} from 'components/common';
 import {BarChart} from 'react-native-gifted-charts';
 import {width} from 'themes/helper';
 import SegmentedControl from './components/SegmentedControl';
+import {useAppDispatch} from 'hooks/redux';
+import {onToggleDrawer} from 'stores/app/slice';
 
 const barData = [
   {value: 250, label: 'Mon'},
@@ -73,11 +75,12 @@ export default function HomeScreen() {
 }
 
 const Header = () => {
+  const dispatch = useAppDispatch();
   const {top} = useSafeAreaInsets();
 
   return (
     <Block rowCenter paddingTop={top + 12} paddingHorizontal={12} gap={20} marginBottom={20}>
-      <Pressable rowCenter gap={12}>
+      <Pressable rowCenter gap={12} onPress={() => dispatch(onToggleDrawer(true))}>
         <Avatar name="Phan Hồng Quân" />
         <Block gap={5}>
           <Text fontSize={14} color={COLORS.textPlaceholder}>

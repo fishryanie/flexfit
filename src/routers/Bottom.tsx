@@ -4,7 +4,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {BottomTabParamList} from 'types/routes';
 import {hs} from 'themes/helper';
 import {COLORS} from 'themes/color';
-import {Icon, Image} from 'components/base';
+import {Image} from 'components/base';
 import {ICONS} from 'assets';
 import HomeScreen from 'screens/bottom/HomeScreen';
 import PlanScreen from 'screens/bottom/PlanScreen';

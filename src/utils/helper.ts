@@ -1,6 +1,18 @@
 import Toast from 'react-native-toast-message';
+import CryptoJS from 'crypto-js';
 import {Linking} from 'react-native';
 import {ToastProps} from 'types/common';
+import {getVersion} from 'react-native-device-info';
+import {BUILD_VERSION} from './constants';
+
+export const DEFAULT_LOCALES = 'vi-VN';
+export const NUMBER_FORMAT = new Intl.NumberFormat(DEFAULT_LOCALES);
+
+/**
+ * @param time miliseconds
+ * @default 3000
+ */
+export const sleep = (time = 3000) => new Promise(r => setTimeout(r, time));
 
 export const getInitialsName = (name: string): string => {
   const words = name.split(' ');
@@ -75,4 +87,12 @@ export const isNewerVersion = (oldVersion = '', newVersion = '') => {
     }
   }
   return false;
+};
+
+export const displayVersion = () => {
+  return `v.${getVersion()}.${BUILD_VERSION}`;
+};
+
+export const hashPwd = (password: string): string => {
+  return CryptoJS.SHA256(password).toString();
 };

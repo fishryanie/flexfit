@@ -9,3 +9,5 @@ import Reactotron from 'reactotron-react-native';
 
 LogBox.ignoreAllLogs();
 AppRegistry.registerComponent(appName, () => App);
+
+require('./reactotron.config');

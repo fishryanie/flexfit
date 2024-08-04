@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Animated, {
   interpolateColor,
   useSharedValue,
@@ -25,18 +25,24 @@ export const Switch = ({
   inActiveColor = COLORS.antiFlashWhite,
   ...props
 }: SwitchProps) => {
+  const [valueSwitch, setValueSwitch] = useState(value);
   const switchTranslate = useSharedValue(0);
   const progress = useDerivedValue(() => {
-    return withTiming(value ? 20 : 0);
+    return withTiming(valueSwitch ? 20 : 0);
   });
 
+  const handleChange = () => {
+    setValueSwitch(!valueSwitch);
+    onChange?.(!valueSwitch);
+  };
+
   useEffect(() => {
-    if (value) {
+    if (valueSwitch) {
       switchTranslate.value = 24;
     } else {
       switchTranslate.value = 2;
     }
-  }, [value, switchTranslate]);
+  }, [valueSwitch, switchTranslate]);
 
   const customSpringStyles = useAnimatedStyle(() => {
     return {
@@ -64,7 +70,7 @@ export const Switch = ({
 
   return (
     <Block {...props}>
-      <TouchableWithoutFeedback onPress={() => onChange && onChange(!value)}>
+      <TouchableWithoutFeedback onPress={handleChange}>
         <Animated.View style={[styles.container, backgroundColorStyle]}>
           <Animated.View style={[styles.circle, customSpringStyles]} />
         </Animated.View>

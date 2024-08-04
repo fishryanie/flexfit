@@ -13,3 +13,6 @@ export const ICONS = {
 };
 
 export const IMAGES = {};
+export const LOTTIE = {
+  update: require('./lotties/update.json'),
+};

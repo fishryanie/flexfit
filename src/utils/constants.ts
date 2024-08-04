@@ -19,3 +19,24 @@ export const INSTALL_APP_URL = Platform.select({
   android: `https://play.google.com/store/apps/details?id=${APP_INFO.androidBundleId}`,
   ios: `itms-apps://itunes.apple.com/app/${APP_INFO.iosAppStoreId}`,
 }) as string;
+
+export const STORE = Platform.select({
+  ios: {
+    ionIconName: 'logo-apple-appstore',
+    name: 'Appstore',
+  },
+  android: {
+    ionIconName: 'logo-google-playstore',
+    name: 'CH Play',
+  },
+}) as {ionIconName: string; name: string};
+
+export const CODE_PUSH_DEPLOYMENT_KEY = Platform.select({
+  ios: {
+    Staging: 'cDCWXNty070zPJzWO2S5VgpRzJscaejllXYiH',
+    Alpha: 'jYa0PGBj7ETpKxIckFL_3WhMEB1V0ZG_Bvrto',
+    Beta: 'FWn6_jjb5W34jWIwppf6bN5n2qkwhXzqGRqG5',
+    Production: 'MzjyIg0ITDx016E1-ciK3Qa_kgzcew-IF06Qo',
+  },
+  android: {},
+}) as {Staging: string; Alpha: string; Beta: string; Production: string};

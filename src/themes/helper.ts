@@ -93,6 +93,12 @@ export const handleFlexGrow = (flexGrow: number | true) => {
   };
 };
 
+export const handleFlexBasis = (flexBasis: number) => {
+  return {
+    flexBasis: isNumber(flexBasis) ? flexBasis : undefined,
+  };
+};
+
 export const getSpacing = ({
   left,
   top,

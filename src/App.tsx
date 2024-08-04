@@ -5,6 +5,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {PersistGate} from 'redux-persist/integration/react';
+import {CodePush} from 'components/modal';
 import {PortalProvider} from '@gorhom/portal';
 import {Provider} from 'react-redux';
 import Routes from 'routers';
@@ -15,11 +16,12 @@ const App: React.FC = () => {
       <PersistGate persistor={persistor} loading={null}>
         <BottomSheetModalProvider>
           <GestureHandlerRootView style={{flex: 1}}>
-            <PortalProvider>
-              <SafeAreaProvider>
+            <SafeAreaProvider>
+              <PortalProvider>
                 <Routes />
-              </SafeAreaProvider>
-            </PortalProvider>
+                <CodePush />
+              </PortalProvider>
+            </SafeAreaProvider>
           </GestureHandlerRootView>
         </BottomSheetModalProvider>
       </PersistGate>

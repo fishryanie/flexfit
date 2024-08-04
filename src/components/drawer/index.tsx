@@ -8,29 +8,30 @@ import Animated, {
   withSpring,
   withTiming,
 } from 'react-native-reanimated';
-import {Block, Icon, Pressable, Text} from 'components/base';
+import {onToggleDrawer, onToggleSelectCodePush} from 'stores/app/slice';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useAppDispatch, useAppSelector} from 'hooks/redux';
+import {Block, Pressable, Text} from 'components/base';
 import {DEFAULT_STYLES} from 'themes/defaultStyles';
 import {RootStackParamList} from 'types/routes';
-import {navigationRef} from 'routers';
-import {COLORS} from 'themes/color';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ButtonDarkMode} from 'components/common';
 import {useColorScheme} from 'react-native';
-
-type DrawerListType = {
-  name: string;
-  icon: React.ReactElement;
-  navigate: keyof RootStackParamList;
-};
+import {displayVersion} from 'utils/helper';
+import {navigationRef} from 'routers';
+import {COLORS} from 'themes/color';
+import {width} from 'themes/helper';
+import {DrawerListType, drawerList} from './data';
 
 type DrawerProps = {
   children: React.ReactElement;
 };
 
 export const Drawer = ({children}: DrawerProps) => {
-  const {top} = useSafeAreaInsets();
+  const dispatch = useAppDispatch();
   const colorScheme = useColorScheme();
   const active = useSharedValue(false);
+  const isShowDrawer = useAppSelector(state => state.app.isShowDrawer);
+  const insets = useSafeAreaInsets();
   const [theme, setTheme] = useState<string | null | undefined>(colorScheme);
   const [themeSwitch, setThemeSwitch] = useState<string>('system');
 
@@ -63,15 +64,17 @@ export const Drawer = ({children}: DrawerProps) => {
       transform: [
         {perspective: 1000},
         {rotateY: `${rotateY}deg`},
-        {scale: active.value ? withTiming(0.8) : withTiming(1)},
-        {translateX: active.value ? withSpring(240) : withTiming(0)},
+        {scale: active.value ? withTiming(0.7) : withTiming(1)},
+        {translateX: active.value ? withSpring(width * 0.8) : withTiming(0)},
       ],
     };
   });
 
   const closeDrawerHandler = () => {
     active.value = false;
+    dispatch(onToggleDrawer(false));
   };
+
   const menuPress = (item: DrawerListType) => {
     closeDrawerHandler();
     navigationRef.navigate(item.navigate as keyof RootStackParamList);
@@ -83,29 +86,20 @@ export const Drawer = ({children}: DrawerProps) => {
     }
   }, [colorScheme, themeSwitch]);
 
+  useEffect(() => {
+    active.value = isShowDrawer;
+  }, [isShowDrawer, active]);
+
   return (
     <Fragment>
       <Animated.View style={animatedContainerStyle}>
-        {/* <Block gap={10} paddingTop={top + 12} paddingHorizontal={15} backgroundColor={COLORS.white}>
-          <Text fontSize={16}>Hi Flexfit 👋 </Text>
-          <Text
-            fontSize={35}
-            fontWeight={700}
-            color={COLORS.primary}
-            style={{letterSpacing: 1}}
-            onPress={() => {
-              active.value = true;
-            }}>
-            Menu
-          </Text>
-        </Block> */}
         {children}
         <Animated.View style={animatedOverlayStyle}>
           <Pressable absoluteFillObject onPress={closeDrawerHandler} />
         </Animated.View>
       </Animated.View>
       <Animated.View style={backgroundColorAnimation}>
-        <Block maxWidth={180} paddingTop={120} paddingHorizontal={30}>
+        <Block flex maxWidth={180} paddingTop={120} paddingHorizontal={30}>
           <Block gap={14} marginBottom={12} paddingBottom={14} borderBottomWidth={1}>
             <Text fontWeight="bold" color="white" fontSize={22}>
               Rakha Wibowo
@@ -120,20 +114,16 @@ export const Drawer = ({children}: DrawerProps) => {
           ))}
           <ButtonDarkMode setTheme={setTheme} theme={theme} setThemeSwitch={setThemeSwitch} themeSwitch={themeSwitch} />
         </Block>
+        <Text
+          right={30}
+          fontSize={12}
+          position="absolute"
+          fontWeight="light"
+          bottom={insets.bottom + 12 || 12}
+          onLongPress={() => dispatch(onToggleSelectCodePush(true))}>
+          {displayVersion()}
+        </Text>
       </Animated.View>
     </Fragment>
   );
 };
-
-const drawerList: DrawerListType[] = [
-  {
-    name: 'My Profile',
-    icon: <Icon type="FontAwesome5" name="user-circle" />,
-    navigate: 'AccountInfoScreen',
-  },
-  {
-    name: 'Settings',
-    icon: <Icon type="Ionicons" name="settings-sharp" />,
-    navigate: 'SettingScreen',
-  },
-];

@@ -1,10 +1,14 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {AuthStackParamList} from 'types/routes';
+import auth from 'screens/auth';
 
-const Auth = () => {
-  return <View></View>;
-};
+const Stack = createNativeStackNavigator<AuthStackParamList>();
 
-const styles = StyleSheet.create({});
-
-export default Auth;
+export default function AuthGroup() {
+  return (
+    <Stack.Group>
+      <Stack.Screen name="LoginScreen" component={auth.LoginScreen} />
+    </Stack.Group>
+  );
+}

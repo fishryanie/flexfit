@@ -1,6 +1,6 @@
 import React, {Ref, forwardRef} from 'react';
 import {ColorValue, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
-import {handleFlex, handleRound, handleSquare, hs} from 'themes/helper';
+import {handleFlex, handleFlexBasis, handleFlexGrow, handleRound, handleSquare, hs} from 'themes/helper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {DEFAULT_STYLES} from 'themes/defaultStyles';
 import {Size} from 'types/common';
@@ -8,6 +8,8 @@ import {Size} from 'types/common';
 export type BlockProps = ViewProps &
   Partial<{
     flex: number | boolean;
+    flexGrow: number | true;
+    flexBasis: number | undefined;
     row: boolean;
     wrap: boolean;
     rowCenter: boolean;
@@ -78,6 +80,8 @@ export const Block = forwardRef(
       style,
       row,
       flex,
+      flexGrow,
+      flexBasis,
       wrap,
       rowCenter,
       contentCenter,
@@ -146,6 +150,8 @@ export const Block = forwardRef(
 
     const _style = [
       flex !== undefined ? handleFlex(flex) : undefined,
+      flexGrow !== undefined ? handleFlexGrow(flexGrow) : undefined,
+      flexBasis !== undefined ? handleFlexBasis(flexBasis) : undefined,
       row ? DEFAULT_STYLES.row : undefined,
       wrap ? DEFAULT_STYLES.wrap : undefined,
       rowCenter ? DEFAULT_STYLES.rowCenter : undefined,
