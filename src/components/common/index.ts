@@ -5,3 +5,4 @@ export * from './BottomSheetBackdrop';
 // export * from './EmptyData';
 export * from './ButtonDarkMode';
 export * from './CustomCalendar';
+export * from './SegmentedControl';

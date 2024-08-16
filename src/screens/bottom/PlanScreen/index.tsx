@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from 'react';
-import {StyleSheet, View, Text, TextInput, FlatList, useWindowDimensions, ListRenderItemInfo} from 'react-native';
+import React, {useCallback, useRef, useState} from 'react';
+import {StyleSheet, View, Text, TextInput, FlatList, ListRenderItemInfo} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
 
-import {Block, Icon, Pressable} from 'components/base';
+import {Icon, Pressable} from 'components/base';
 import CalendarModal from './components/CalendarModal';
 import {Header} from 'components/common';
 import RenderItem, {HOTEL_LIST, HotelListType} from './components/RenderItem';
+import {useSharedValue} from 'react-native-reanimated';
 
 // import CustomerCalendar from './CalendarPopupView';
 // import FilterModal from './FiltersModal';
@@ -14,7 +14,7 @@ import RenderItem, {HOTEL_LIST, HotelListType} from './components/RenderItem';
 // import {HOTEL_LIST, HotelListType} from './model/hotel_list_data';
 
 const HALF_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+const viewabilityConfig = {viewAreaCoveragePercentThreshold: 10};
 const HotelHomeScreen: React.FC = () => {
   const {bottom} = useSafeAreaInsets();
   const [startDate, setStartDate] = useState<Date>(new Date());
@@ -25,6 +25,12 @@ const HotelHomeScreen: React.FC = () => {
   });
   const [showCal, setShowCal] = useState<boolean>(false);
   const [showFilter, setShowFilter] = useState<boolean>(false);
+  const viewable = useSharedValue([]);
+  const onViewableItemChange = ({viewableItem}) => {
+    viewable.value = viewableItem.map(item => item.index);
+  };
+
+  const viewabilityConfigPairs = useRef([{onViewableItemChange, viewabilityConfig}]);
 
   const ContentHeader = useCallback(
     () => (
@@ -65,7 +71,7 @@ const HotelHomeScreen: React.FC = () => {
   const renderItem = useCallback(
     (data: ListRenderItemInfo<HotelListType>) =>
       data.index > 0 ? (
-        <RenderItem {...{data}} />
+        <RenderItem {...{data}} viewable={viewable} />
       ) : (
         <View style={styles.stickyHeaderContainer}>
           <Text style={styles.hotelCountText}>530 hotels found</Text>
@@ -101,6 +107,8 @@ const HotelHomeScreen: React.FC = () => {
           data={HOTEL_LIST}
           renderItem={renderItem}
           keyExtractor={item => item.id.toString()}
+          viewabilityConfig={{viewAreaCoveragePercentThreshold: 10}}
+          viewabilityConfigCallbackPairs={viewabilityConfigPairs.current}
         />
       </View>
 

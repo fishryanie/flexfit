@@ -41,7 +41,7 @@ export default function Routes() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         {/* {AuthGroup()} */}
         <Stack.Screen name="DrawerWrapper" component={DrawerWrapper} />
-        {/* {GroupDrawer()} */}
+        {GroupDrawer()}
       </Stack.Navigator>
     </NavigationContainer>
   );

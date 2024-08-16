@@ -1,14 +1,16 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {StyleSheet, View, Text, Platform} from 'react-native';
-import {Pressable} from 'components/base';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-// import MyPressable from '../components/MyPressable';
+import {Icon, Pressable} from 'components/base';
+import {COLORS} from 'themes/color';
 
 interface Props {
-  minDate: Date | null;
-  startDate: Date | null;
-  endDate: Date | null;
-  startEndDateChange: (startData: Date | null, endData: Date | null) => void;
+  selectedDate?: Date | null;
+  dateChange?: (date: Date | null) => void;
+  minDate?: Date | null;
+  startDate?: Date | null;
+  endDate?: Date | null;
+  isMutable?: boolean;
+  startEndDateChange?: (startData: Date | null, endData: Date | null) => void;
 }
 
 const MONTH_NAMES = [
@@ -28,12 +30,25 @@ const MONTH_NAMES = [
 
 const WEEK_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export const CustomCalendar: React.FC<Props> = ({minDate, startDate, endDate, startEndDateChange}) => {
+export const CustomCalendar: React.FC<Props> = ({
+  isMutable,
+  minDate,
+  startDate,
+  endDate,
+  dateChange,
+  startEndDateChange,
+}) => {
   const [dateList, setDateList] = useState<Date[]>([]);
+  const [selectedDate, setSelectedDate] = useState<Date>();
 
   let currentMonthDate = useRef<Date>(new Date()).current;
   let minimumDate = useRef<Date | null>(minDate).current;
   let maximumDate = useRef<Date | null>(null).current;
+
+  const selectDateHandler = (date: Date) => {
+    dateChange?.(date);
+    setSelectedDate(date);
+  };
 
   const setListOfDate = useCallback((monthDate: Date) => {
     const dates: Date[] = [];
@@ -206,25 +221,27 @@ export const CustomCalendar: React.FC<Props> = ({minDate, startDate, endDate, st
               style={[
                 styles.dayNoBtnContainer,
                 {
-                  borderWidth: isDateStartOrEnd ? 2 : 0,
-                  borderColor: isDateStartOrEnd ? 'white' : 'transparent',
-                  backgroundColor: isDateStartOrEnd ? 'rgb(84, 211, 194)' : 'transparent',
+                  borderWidth: (isMutable && isDateStartOrEnd) || selectedDate === date ? 2 : 0,
+                  borderColor: (isMutable && isDateStartOrEnd) || selectedDate === date ? 'white' : 'transparent',
+                  backgroundColor:
+                    (isMutable && isDateStartOrEnd) || selectedDate === date ? COLORS.primary : 'transparent',
                 },
-                isDateStartOrEnd && styles.activeDatesShadow,
+                ((isMutable && isDateStartOrEnd) || selectedDate === date) && styles.activeDatesShadow,
               ]}>
               <Pressable
                 style={styles.dayNoBtn}
-                // android_ripple={{color: 'lightgrey', borderless: true}}
-                onPress={() => onDatePressedValidations(date)}>
+                onPress={() => (isMutable ? onDatePressedValidations(date) : selectDateHandler(date))}>
                 <Text
                   style={{
                     fontSize: 18,
-                    fontFamily: isDateStartOrEnd ? 'WorkSans-Bold' : 'WorkSans-Regular',
-                    color: isDateStartOrEnd
-                      ? 'white'
-                      : currentMonthDate.getMonth() === date.getMonth()
-                      ? 'black'
-                      : 'lightgrey',
+                    fontFamily:
+                      (isMutable && isDateStartOrEnd) || selectedDate === date ? 'WorkSans-Bold' : 'WorkSans-Regular',
+                    color:
+                      (isMutable && isDateStartOrEnd) || selectedDate === date
+                        ? 'white'
+                        : currentMonthDate.getMonth() === date.getMonth()
+                        ? 'black'
+                        : 'lightgrey',
                   }}>
                   {date.getDate()}
                 </Text>
@@ -268,7 +285,7 @@ export const CustomCalendar: React.FC<Props> = ({minDate, startDate, endDate, st
               currentMonthDate.setMonth(currentMonthDate.getMonth() - 1);
               setListOfDate(currentMonthDate);
             }}>
-            <Icon name="keyboard-arrow-left" size={28} color="grey" />
+            <Icon type="MaterialIcons" name="keyboard-arrow-left" size={28} color="grey" />
           </Pressable>
         </View>
         <Text style={styles.monthHeaderStyle}>
@@ -282,7 +299,7 @@ export const CustomCalendar: React.FC<Props> = ({minDate, startDate, endDate, st
               currentMonthDate.setMonth(currentMonthDate.getMonth() + 1);
               setListOfDate(currentMonthDate);
             }}>
-            <Icon name="keyboard-arrow-right" size={28} color="grey" />
+            <Icon type="MaterialIcons" name="keyboard-arrow-right" size={28} color="grey" />
           </Pressable>
         </View>
       </View>
@@ -323,7 +340,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontFamily: 'WorkSans-Medium',
-    color: '#54D3C2',
+    color: COLORS.primary,
   },
   dayNoRowView: {
     flexDirection: 'row',

@@ -4,7 +4,6 @@ import React from 'react';
 import {Block, Icon, Modal, ModalProps, Pressable, Text} from 'components/base';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from 'themes/color';
-import {navigationRef} from 'routers';
 
 export default function ModalReferralCode(props: ModalProps) {
   const {bottom} = useSafeAreaInsets();
