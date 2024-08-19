@@ -1,6 +1,6 @@
-import React, {ReactElement} from 'react';
+import React, {useState} from 'react';
 
-import {View, Text, TouchableOpacity, StatusBar, StyleSheet, Platform, StyleProp, ViewStyle} from 'react-native';
+import {StyleSheet, Platform} from 'react-native';
 import Animated, {
   Extrapolation,
   interpolate,
@@ -9,11 +9,35 @@ import Animated, {
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';
-import {useNavigation, useTheme} from '@react-navigation/native';
 import {COLORS} from 'themes/color';
 import {width} from 'themes/helper';
-import {Icon} from 'components/base';
-import {CTAItems, ListItem, MembersTab} from './components/Header2Components';
+import {Block, Button, Icon, Image, Modal, Pressable, Text} from 'components/base';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {navigationRef} from 'routers';
+
+type HealthMetrics = 'BMI' | 'BMR' | 'TDEE';
+type HealthMetricsItemList = {title: HealthMetrics; value: string; image_url: string; calculationFormula: string};
+
+const listHealthMetrics: HealthMetricsItemList[] = [
+  {
+    title: 'BMI',
+    value: '1800',
+    image_url: 'https://cdn-icons-png.flaticon.com/128/4349/4349071.png',
+    calculationFormula: '',
+  },
+  {
+    title: 'TDEE',
+    value: '1800',
+    image_url: 'https://cdn-icons-png.flaticon.com/128/8923/8923711.png',
+    calculationFormula: '',
+  },
+  {
+    title: 'BMR',
+    value: '1800',
+    image_url: 'https://cdn-icons-png.flaticon.com/128/4514/4514739.png',
+    calculationFormula: '',
+  },
+];
 
 export const constants = {
   padding: 16,
@@ -28,15 +52,13 @@ export const constants = {
 
 export default function AccountInfoScreen() {
   const scrollY = useSharedValue(0);
-  const navigation = useNavigation();
-  const {colors, dark} = useTheme();
+  const {bottom} = useSafeAreaInsets();
+  const [showInfoHealthMetrics, setShowInfoHealthMetrics] = useState<HealthMetricsItemList>();
 
   const handleScroll = useAnimatedScrollHandler(e => {
     scrollY.value = e.contentOffset.y;
   });
 
-  const bgColor = dark ? COLORS.black : COLORS.white;
-  const bgColor2 = dark ? COLORS.black : COLORS.chineseOrange;
   const offsetValue = 140;
   const animatedHeader = useAnimatedStyle(() => {
     const headerInitialHeight = 130;
@@ -48,11 +70,15 @@ export default function AccountInfoScreen() {
       Extrapolation.CLAMP,
     );
 
-    const backgroundColor = interpolateColor(scrollY.value, [0, offsetValue], [bgColor, bgColor2]);
+    const backgroundColor = interpolateColor(scrollY.value, [0, offsetValue], [COLORS.antiFlashWhite, COLORS.primary]);
     return {
       backgroundColor,
       height,
     };
+  });
+  const iconAnimatedStyles = useAnimatedStyle(() => {
+    const opacity = interpolate(scrollY.value, [0, 100, offsetValue], [0, 0, 1], Extrapolation.CLAMP);
+    return {opacity};
   });
   const nameAnimatedStyles = useAnimatedStyle(() => {
     const opacity = interpolate(scrollY.value, [0, 100, offsetValue], [0, 0, 1], Extrapolation.CLAMP);
@@ -74,19 +100,32 @@ export default function AccountInfoScreen() {
   });
 
   return (
-    <View style={[styles.container, {backgroundColor: colors.background}]}>
-      <StatusBar backgroundColor={bgColor2} translucent />
+    <Block flex backgroundColor={COLORS.antiFlashWhite}>
       {/* header */}
-      <Animated.View style={[styles.header, {backgroundColor: bgColor}, animatedHeader]}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Icon type="Feather" name="arrow-left" color={COLORS.white} />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.showMoreButton} onPress={() => {}}>
-          <Icon type="Feather" name="more-vertical" color={COLORS.white} />
-        </TouchableOpacity>
-        <Animated.View style={[styles.headerView, nameAnimatedStyles]}>
+      <Animated.View style={[styles.header, animatedHeader]}>
+        <Pressable contentCenter position="relative" padding={8} onPress={navigationRef.goBack}>
+          <Icon position="absolute" type="MaterialIcons" name="arrow-back" size={25} />
+          <Animated.View style={iconAnimatedStyles}>
+            <Icon type="MaterialIcons" name="arrow-back" size={25} color={COLORS.white} />
+          </Animated.View>
+        </Pressable>
+        <Animated.View style={[nameAnimatedStyles]}>
           <Text style={styles.headerTitle}>{constants.name}</Text>
         </Animated.View>
+        <Block rowCenter flexGrow={1} flexBasis={0} justifyContent="flex-end">
+          <Pressable contentCenter position="relative" padding={8}>
+            <Icon position="absolute" type="Feather" name="share" size={25} />
+            <Animated.View style={iconAnimatedStyles}>
+              <Icon type="Feather" name="share" size={25} color={COLORS.white} />
+            </Animated.View>
+          </Pressable>
+          <Pressable contentCenter position="relative" padding={8}>
+            <Icon position="absolute" type="Feather" name="more-vertical" size={25} />
+            <Animated.View style={iconAnimatedStyles}>
+              <Icon type="Feather" name="more-vertical" size={25} color={COLORS.white} />
+            </Animated.View>
+          </Pressable>
+        </Block>
       </Animated.View>
       <Animated.Image
         source={{uri: 'https://hocdohoacaptoc.com/wp-content/uploads/2022/02/avata-dep-nam-2.jpg'}}
@@ -97,72 +136,219 @@ export default function AccountInfoScreen() {
         bounces={false}
         onScroll={handleScroll}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{paddingBottom: constants.padding}}>
-        <View style={[styles.nameTextContainer, {backgroundColor: bgColor}]}>
-          <Text style={[styles.name, {color: colors.text}]}>{constants.name}</Text>
-          <Text style={styles.threadType}>Group - {constants.membersCount} members</Text>
-        </View>
-        {/* horizontal CTA's view */}
-        <View style={[styles.ctaStyles, {backgroundColor: bgColor}]}>
-          <MapList
-            fragment
-            data={Array.from({length: 10})}
-            renderItem={(item, index) => (
-              <CTAItems
-                key={index}
-                name={item?.name}
-                iconName={item?.icon}
-                iconType={item?.iconType}
-                color={colors?.text}
-              />
-            )}
-          />
-        </View>
-        <View style={{marginVertical: constants.margin, padding: constants.padding, backgroundColor: bgColor}}>
-          <Text style={styles.tabTitleText}>Add group description</Text>
-          <Text style={styles.createdAt}>Created by You, today at 2:26 pm</Text>
-        </View>
-        {/* thread settings list1 */}
-        <View style={{backgroundColor: bgColor}}>
-          <MapList
-            fragment
-            data={Array.from({length: 10})}
-            renderItem={(item, index) => <ListItem key={index} {...item} color={colors.text} />}
-          />
-        </View>
-        {/* thread settings list2 */}
-        <View style={{backgroundColor: bgColor, marginVertical: constants.margin}}>
-          <MapList
-            fragment
-            data={Array.from({length: 10})}
-            renderItem={(item, index) => <ListItem key={index} {...item} color={colors.text} />}
-          />
-        </View>
+        contentContainerStyle={{paddingBottom: bottom + 50}}>
+        <Block gap={5} paddingTop={100} paddingBottom={5} alignItems="center">
+          <Text fontSize={25} fontWeight={500}>
+            Developer
+          </Text>
+          <Block rowCenter>
+            <Text fontSize={16}>0 follower</Text>
+            <Icon type="Entypo" name="dot-single" />
+            <Text fontSize={16}>0 following</Text>
+          </Block>
+        </Block>
 
-        <View style={[styles.addCommunityTab, {backgroundColor: bgColor}]}>
-          <View style={styles.iconContainer}>
-            <Icon name="users" type="FontAwesome5" color={COLORS.white} />
-          </View>
-          <View style={styles.communityTextContainer}>
-            <Text style={styles.tabTitleText}>Add group to a community</Text>
-            <Text style={styles.bringMembersText}>Bring members together to topic based groups</Text>
-          </View>
-        </View>
+        <Block rowCenter gap={12} padding={12}>
+          {listHealthMetrics.map(item => (
+            <Pressable
+              flex
+              gap={8}
+              radius={15}
+              padding={12}
+              key={item.title}
+              alignItems="center"
+              backgroundColor={COLORS.white}
+              onPress={() => setShowInfoHealthMetrics(item)}>
+              <Image square={50} source={{uri: item.image_url}} />
+              <Text flex textAlign="center" fontSize={16} fontWeight={900}>
+                {item.title}
+              </Text>
+              <Text fontSize={16} fontWeight={600}>
+                {item.value} <Text fontSize={12}>kcal</Text>
+              </Text>
+            </Pressable>
+          ))}
+        </Block>
 
-        <View style={{backgroundColor: bgColor, marginVertical: constants.margin}}>
-          <Text style={styles.membersCountStyles}>2 Members</Text>
-          <MembersTab text="Add members" color={colors.text} iconName="person-add" />
-          <MembersTab text="Invite via link" color={colors.text} iconName="insert-link" />
-        </View>
+        <Text fontSize={15} fontWeight={500} marginHorizontal={12} marginTop={12}>
+          Fitness
+        </Text>
+        <Block radius={15} margin={12} paddingHorizontal={12} backgroundColor={COLORS.white}>
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="dumbbell" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Goal
+            </Text>
+            <Text fontSize={16}>168 centimetres</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="FontAwesome5" name="location-arrow" marginRight={8} size={18} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Location
+            </Text>
+            <Text fontSize={16}>63 kilograms</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="clock-time-nine-outline" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Frequency
+            </Text>
+            <Text fontSize={16}>63 kilograms</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+        </Block>
+
+        <Text fontSize={15} fontWeight={500} marginHorizontal={12} marginTop={12}>
+          Body Information
+        </Text>
+        <Block radius={15} margin={12} paddingHorizontal={12} backgroundColor={COLORS.white}>
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="human-male-height" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Height
+            </Text>
+            <Text fontSize={16}>168 centimetres</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="weight-lifter" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Weight
+            </Text>
+            <Text fontSize={16}>63 kilograms</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="calendar-week" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Birthday
+            </Text>
+            <Text fontSize={16}>63 kilograms</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="MaterialCommunityIcons" name="gender-transgender" marginRight={8} size={22} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Gender
+            </Text>
+            <Text fontSize={16}>63 kilograms</Text>
+            <Icon type="MaterialIcons" name="chevron-right" size={22} marginLeft={2} marginRight={-5} />
+          </Block>
+        </Block>
+
+        <Text fontSize={15} fontWeight={500} marginHorizontal={12} marginTop={12}>
+          Auth
+        </Text>
+        <Block radius={15} margin={12} paddingHorizontal={12} backgroundColor={COLORS.white}>
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="Entypo" name="email" marginRight={12} size={20} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Email
+            </Text>
+            <Button
+              title="Set Up"
+              height={30}
+              radius={15}
+              fontSize={14}
+              fontWeight={600}
+              paddingRight={15}
+              paddingLeft={10}
+              color={COLORS.textPrimary}
+              backgroundColor={COLORS.antiFlashWhite}
+              iconLeft={<Icon type="Ionicons" name="add-circle" size={18} marginRight={8} />}
+            />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="Entypo" name="phone" marginRight={12} size={20} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Phone
+            </Text>
+            <Button
+              title="Set Up"
+              height={30}
+              radius={15}
+              fontSize={14}
+              fontWeight={600}
+              paddingRight={15}
+              paddingLeft={10}
+              color={COLORS.textPrimary}
+              backgroundColor={COLORS.antiFlashWhite}
+              iconLeft={<Icon type="Ionicons" name="add-circle" size={18} marginRight={8} />}
+            />
+          </Block>
+        </Block>
+
+        <Text fontSize={15} fontWeight={500} marginHorizontal={12} marginTop={12}>
+          Linkd Accounts
+        </Text>
+        <Block radius={15} margin={12} paddingHorizontal={12} backgroundColor={COLORS.white}>
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="Ionicons" name="logo-apple" marginRight={12} color={COLORS.black} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Apple
+            </Text>
+            <Button
+              title="Link"
+              height={30}
+              radius={15}
+              fontSize={14}
+              fontWeight={600}
+              paddingHorizontal={15}
+              color={COLORS.textPrimary}
+              backgroundColor={COLORS.antiFlashWhite}
+            />
+          </Block>
+          <Block height={1} backgroundColor={COLORS.antiFlashWhite} />
+          <Block rowCenter paddingVertical={12}>
+            <Icon type="Ionicons" name="logo-google" marginRight={12} color={COLORS.electricRed} />
+            <Text flex fontSize={17} fontWeight={600}>
+              Google
+            </Text>
+            <Button
+              title="Link"
+              height={30}
+              radius={15}
+              fontSize={14}
+              fontWeight={600}
+              paddingHorizontal={15}
+              color={COLORS.textPrimary}
+              backgroundColor={COLORS.antiFlashWhite}
+            />
+          </Block>
+        </Block>
+
+        <Button title="Logout" margin={12} />
+        <Pressable>
+          <Text textAlign="center">Delete Account</Text>
+        </Pressable>
       </Animated.ScrollView>
-    </View>
+
+      <Modal
+        position="center"
+        isVisible={!!showInfoHealthMetrics}
+        onBackdropPress={() => setShowInfoHealthMetrics(undefined)}>
+        <Block radius={12} padding={12} margin={12} backgroundColor={COLORS.white}>
+          <Text fontSize={16} lineHeight={22}>
+            TDEE (Total Daily Energy Expenditure) là tổng năng lượng tiêu thụ hàng ngày, phụ thuộc vào mức độ hoạt động
+            của bạn. Công thức tính TDEE như sau:
+          </Text>
+          <Text>TDEE = BMR x Mức độ hoạt động</Text>
+        </Block>
+      </Modal>
+    </Block>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   header: {
     paddingTop: Platform.OS === 'ios' ? 50 : 60,
     width: '100%',
@@ -170,24 +356,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     zIndex: 1,
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'center',
   },
-  headerView: {
-    // marginTop: 60,
-    // backgroundColor: 'yellow',
-  },
+
   headerTitle: {
     fontSize: 24,
     fontWeight: '500',
     marginHorizontal: 60,
     color: COLORS.white,
   },
-  backButton: {
-    width: constants.headerButtonWidth,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: constants.padding,
-  },
+  // backButton: {
+  //   width: constants.headerButtonWidth,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  //   marginTop: constants.padding,
+  // },
   showMoreButton: {
     width: constants.headerButtonWidth,
     alignItems: 'center',
@@ -256,23 +439,3 @@ const styles = StyleSheet.create({
     top: 70,
   },
 });
-
-type MapListProps = {
-  data: any[];
-  renderItem: (item: any, index: number) => ReactElement;
-  style?: StyleProp<ViewStyle>;
-  fragment?: boolean;
-};
-
-const MapList = ({data, renderItem, style, fragment}: MapListProps) => {
-  if (data.length === 0 && !renderItem) return null;
-  const MappedView = () => <>{data.map((item, index) => renderItem(item, index))}</>;
-  if (fragment) {
-    return <MappedView />;
-  }
-  return (
-    <View style={style}>
-      <MappedView />
-    </View>
-  );
-};

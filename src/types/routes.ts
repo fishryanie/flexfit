@@ -5,11 +5,11 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> = NativeSta
 export type RootStackParamList = AuthStackParamList & DrawerStackParamList & CommonStackParamList;
 
 export type BottomTabParamList = {
-  BottomHomeScreen: undefined;
+  BottomPremiumScreen: undefined;
   BottomPlanScreen?: undefined;
-  BottomNotifyScreen: undefined;
-  BottomOrderScreen?: undefined;
-  BottomProfileScreen: undefined;
+  BottomNewsFeedScreen: undefined;
+  BottomStatisticalScreen?: undefined;
+  BottomMessageScreen: undefined;
 };
 
 export type AuthStackParamList = {

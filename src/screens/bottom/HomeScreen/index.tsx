@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import {Block, Icon, Pressable, Text} from 'components/base';
+import {Block, Icon, Image, List, Pressable, Text} from 'components/base';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from 'themes/color';
 import {Avatar} from 'components/common';

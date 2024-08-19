@@ -1,6 +1,6 @@
 import React, {ReactElement} from 'react';
 import {ActivityIndicator} from 'react-native';
-import {Pressable, PressableProps, Text} from 'components/base';
+import {Pressable, PressableProps, TextProps, Text, Block} from 'components/base';
 import {COLORS} from 'themes/color';
 
 type ButtonProps = Partial<
@@ -12,9 +12,10 @@ type ButtonProps = Partial<
     maxWidth: number;
     title: string;
     color: string;
-    fontSize: number;
-    colorTitle: string;
-    icon: ReactElement;
+    fontSize: TextProps['fontSize'];
+    fontWeight: TextProps['fontWeight'];
+    iconLeft: ReactElement;
+    iconRight: ReactElement;
   } & PressableProps
 >;
 
@@ -22,6 +23,9 @@ export const Button = ({
   onPress,
   title = '',
   disabled,
+  fontWeight,
+  iconLeft,
+  iconRight,
   radius = 10,
   height = 45,
   fontSize = 16,
@@ -45,9 +49,13 @@ export const Button = ({
       {loading ? (
         <ActivityIndicator size="small" color={color} />
       ) : (
-        <Text color={color} fontSize={fontSize}>
-          {title}
-        </Text>
+        <Block rowCenter>
+          {iconLeft}
+          <Text color={color} fontSize={fontSize} fontWeight={fontWeight}>
+            {title}
+          </Text>
+          {iconRight}
+        </Block>
       )}
     </Pressable>
   );

@@ -8,8 +8,11 @@ export const ICONS = {
   ic_toastErrorIcon: require('./icons/toastErrorIcon.png'),
   ic_toastSuccessIcon: require('./icons/toastSuccessIcon.png'),
   ic_toastWarningIcon: require('./icons/toastWarningIcon.png'),
-  ic_bottomHome: 'https://cdn-icons-png.flaticon.com/128/2173/2173841.png',
-  ic_bottomPlan: 'https://cdn-icons-png.flaticon.com/128/13564/13564709.png',
+  ic_bottomNewsFeed: 'https://cdn-icons-png.flaticon.com/128/9217/9217783.png',
+  ic_bottomPlan: 'https://cdn-icons-png.flaticon.com/128/6201/6201361.png',
+  ic_bottomStatistical: 'https://cdn-icons-png.flaticon.com/128/2207/2207511.png',
+  ic_bottomMessage: 'https://cdn-icons-png.flaticon.com/128/1358/1358039.png',
+  ic_bottomPremium: 'https://cdn-icons-png.flaticon.com/128/10188/10188094.png',
 };
 
 export const IMAGES = {};
