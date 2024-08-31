@@ -20,5 +20,6 @@ export * from './TextInput';
 export * from './WheelNumberPicker';
 export * from './ProgressBar';
 export * from './List';
+export * from './Toast';
 
 // export * from './List';

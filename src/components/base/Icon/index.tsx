@@ -18,7 +18,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
 import {COLORS} from 'themes/color';
 import {handleFlex, hs} from 'themes/helper';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 
 export type IconType =
   | 'AntDesign'

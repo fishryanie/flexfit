@@ -1,9 +1,9 @@
 import Toast from 'react-native-toast-message';
 import CryptoJS from 'crypto-js';
 import {Linking} from 'react-native';
-import {ToastProps} from 'types/common';
 import {getVersion} from 'react-native-device-info';
 import {BUILD_VERSION} from './constants';
+import { ToastProps } from 'types/shared';
 
 export const DEFAULT_LOCALES = 'vi-VN';
 export const NUMBER_FORMAT = new Intl.NumberFormat(DEFAULT_LOCALES);

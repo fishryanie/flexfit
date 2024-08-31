@@ -5,8 +5,9 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {PersistGate} from 'redux-persist/integration/react';
-import {CodePush} from 'components/modal';
+import {CodePush, ModalLoginExpired} from 'components/modal';
 import {PortalProvider} from '@gorhom/portal';
+import {ToastCustom} from 'components/base';
 import {Provider} from 'react-redux';
 import Routes from 'routers';
 
@@ -20,7 +21,9 @@ const App: React.FC = () => {
               <PortalProvider>
                 <Routes />
                 <CodePush />
+                <ModalLoginExpired />
               </PortalProvider>
+              <ToastCustom />
             </SafeAreaProvider>
           </GestureHandlerRootView>
         </BottomSheetModalProvider>

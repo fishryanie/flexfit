@@ -26,7 +26,7 @@ export default function ModalReferralCode(props: ModalProps) {
           position="absolute"
           color={COLORS.blackTransparent20}
         />
-        <Pressable rowCenter radius={15} padding={15} backgroundColor={COLORS.light}>
+        <Pressable rowCenter radius={15} padding={15} backgroundColor={COLORS.border}>
           <Icon name="plus" size={20} color={COLORS.primary} type="Octicons" marginRight={10} />
           <Text fontWeight="medium" textAlign="center" fontSize={18}>
             Add Referral Code

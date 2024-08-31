@@ -3,7 +3,7 @@ import {ColorValue, Text as RNText, TextProps as RNTextProps, StyleSheet, TextSt
 import {COLORS} from 'themes/color';
 // import {COLORS} from 'themes/color';
 import {fs, handleFlex, hs} from 'themes/helper';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 
 export type TextProps = RNTextProps &
   Partial<{

@@ -5,6 +5,7 @@ import {MMKV} from 'react-native-mmkv';
 type KeyValue = {
   isRefreshing: boolean;
   accessToken: string;
+  refreshToken: string;
   welcomeSound: boolean;
 };
 
@@ -17,6 +18,7 @@ class Storage extends MMKV {
         return super.getBoolean(key) as V;
       // string
       case 'accessToken':
+      case 'refreshToken':
         return super.getString(key) as V;
       // object
       default:

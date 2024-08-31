@@ -10,7 +10,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from 'themes/color';
 import {DEFAULT_STYLES} from 'themes/defaultStyles';
 import {fs, handleFlex, handleRound, handleSquare, hs} from 'themes/helper';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 
 export type TextInputProps = RNTextInputProps &
   Partial<{

@@ -1,60 +1,93 @@
 /** @format */
 
-import React from 'react';
-import {Block, Icon, Modal, Text, Pressable, ModalProps} from 'components/base';
+import React, {useState} from 'react';
+import {Block, Icon, Modal, Text, Pressable, ModalProps, Loading} from 'components/base';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useLoginSocial} from 'stores/auth/apiHooks';
 import {COLORS} from 'themes/color';
+import {Platform} from 'react-native';
+import useAccountLink from 'hooks/accountLink';
 
 export default function ModalConnectSocial(props: ModalProps) {
+  const [isLoadingSocial, setLoadingSocial] = useState(false);
   const {bottom} = useSafeAreaInsets();
-  // const handleSubmit = () => {
-  //   setOpen(false);
-  // };
+  const {isLoading, request} = useLoginSocial();
+  const {appleSignIn, googleSignIn} = useAccountLink();
+  const handleLoginSocial = async (type: 'google' | 'facebook' | 'apple') => {
+    setLoadingSocial(true);
+    let profile;
+    if (type === 'apple') {
+      profile = await appleSignIn();
+    } else if (type === 'google') {
+      profile = await googleSignIn();
+    }
+    if (profile?.user.providerData[0]) {
+      const {uid, email, displayName, photoURL} = profile.user.providerData[0];
+      request({uid, email, displayName, picture: photoURL}).then(() => {
+        props.setIsVisible?.(false);
+      });
+    }
+    setLoadingSocial(false);
+  };
 
   return (
-    <Modal {...props}>
-      <Block radius={20} marginBottom={bottom + 15} marginHorizontal={15} backgroundColor={COLORS.antiFlashWhite}>
-        <Block padding={15} backgroundColor={COLORS.primary}>
-          <Text fontWeight="bold" textAlign="center" fontSize={18}>
+    <Modal {...props} onBackdropPress={props.onClose}>
+      <Loading visible={isLoadingSocial || isLoading} />
+      <Block
+        gap={1}
+        radius={30}
+        paddingBottom={35}
+        marginHorizontal={15}
+        marginBottom={bottom + 15}
+        backgroundColor={COLORS.antiFlashWhite}>
+        <Block rowCenter padding={15}>
+          <Block flexGrow={1} flexBasis={0} justifyContent="flex-start" />
+          <Text fontWeight={600} fontSize={18}>
             Other Option
           </Text>
-          <Icon
-            right={15}
-            top={15}
-            size={20}
-            type="AntDesign"
-            name="closecircle"
-            position="absolute"
-            onPress={props.onClose}
-            color={COLORS.blackTransparent20}
-          />
+          <Block flexGrow={1} flexBasis={0} justifyContent="flex-end">
+            <Pressable onPress={props.onClose} alignSelf="flex-end">
+              <Icon type="Ionicons" name="close-circle" color={COLORS.blackTransparent20} />
+            </Pressable>
+          </Block>
         </Block>
-        <Pressable rowCenter padding={15} borderBottomWidth={1} borderColor={COLORS.background}>
-          <Icon marginRight={10} name="logo-google" size={20} type="Ionicons" />
-          <Text fontWeight="bold" fontSize={14}>
+        <Pressable
+          rowCenter
+          gap={10}
+          padding={15}
+          backgroundColor={COLORS.white}
+          onPress={() => handleLoginSocial('google')}>
+          <Icon name="logo-google" type="Ionicons" />
+          <Text fontWeight={600} fontSize={16}>
             Continue with Google
           </Text>
         </Pressable>
-        <Pressable rowCenter padding={15}>
-          <Icon marginRight={10} type="MaterialIcons" name="facebook" size={20} />
-          <Text fontWeight="bold">Continue with Facebook</Text>
+        {Platform.OS === 'ios' && (
+          <Pressable
+            rowCenter
+            gap={10}
+            padding={15}
+            backgroundColor={COLORS.white}
+            onPress={() => handleLoginSocial('apple')}>
+            <Icon type="Ionicons" name="logo-apple" />
+            <Text fontWeight={600} fontSize={16}>
+              Continue with Apple
+            </Text>
+          </Pressable>
+        )}
+        <Block height={12} gap={10} backgroundColor={COLORS.antiFlashWhite} />
+        <Pressable rowCenter padding={15} backgroundColor={COLORS.white}>
+          <Icon marginRight={10} name="mail" type="MaterialIcons" />
+          <Text fontWeight={600} fontSize={16}>
+            Continue with Email
+          </Text>
         </Pressable>
-        <Block height={25} width={'100%'} backgroundColor={COLORS.bg_bottom} />
-        <Pressable rowCenter padding={15} borderBottomWidth={1} borderColor={COLORS.background}>
-          <Icon
-            marginRight={10}
-            name="ios-phone-portrait-outline"
-            size={20}
-            color={COLORS.textPlaceholder}
-            type={'Ionicons'}
-          />
-          <Text fontWeight="bold">Continue with Phone Number</Text>
+        <Pressable rowCenter gap={10} padding={15} backgroundColor={COLORS.white}>
+          <Icon name="local-phone" type="MaterialIcons" />
+          <Text fontWeight={600} fontSize={16}>
+            Continue with Phone Number
+          </Text>
         </Pressable>
-        <Pressable rowCenter padding={15}>
-          <Icon marginRight={10} name="mail" size={20} color={COLORS.textPlaceholder} type="Foundation" />
-          <Text fontWeight="bold">Continue with Email</Text>
-        </Pressable>
-        <Block height={25} width={'100%'} backgroundColor={COLORS.bg_bottom} />
       </Block>
     </Modal>
   );

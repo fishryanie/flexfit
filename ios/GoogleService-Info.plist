@@ -2,29 +2,33 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>807948756966-p0ad2ecsk56qfo31p82hrahbmko1tqq5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.807948756966-p0ad2ecsk56qfo31p82hrahbmko1tqq5</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAeb8E5t-Xru48KjcnySgJKGhMQ51p5pAg</string>
+	<string>AIzaSyAZiPEQ0Ir0-qDwWZpVbwVnviagqpkvKes</string>
 	<key>GCM_SENDER_ID</key>
-	<string>635560080656</string>
+	<string>807948756966</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.ryan.flexfit</string>
+	<string>com.fish.fitate</string>
 	<key>PROJECT_ID</key>
-	<string>flexfit-fc1cd</string>
+	<string>fitate</string>
 	<key>STORAGE_BUCKET</key>
-	<string>flexfit-fc1cd.appspot.com</string>
+	<string>fitate.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:635560080656:ios:a2041a49ecca538bfd6195</string>
+	<string>1:807948756966:ios:fd1ad67c605d9157491827</string>
 </dict>
 </plist>

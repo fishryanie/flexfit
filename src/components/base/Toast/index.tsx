@@ -1,11 +1,10 @@
 import React from 'react';
 import Toast, {ToastConfigParams} from 'react-native-toast-message';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Block, Pressable, Text} from 'components/Base';
+import {Block, Pressable, Text} from 'components/base';
 import {rhs, width} from 'themes/helper';
-import {COLORS} from 'themes/color';
-import {Image} from 'react-native';
 import {ICONS} from 'assets';
+import {Image} from 'react-native';
 
 const iconToast = {
   success: ICONS.ic_toastSuccessIcon,
@@ -30,7 +29,7 @@ export type ToastMessageProps = {
   action: {title: string; onPress: () => void};
 };
 
-export const CustomToast = () => {
+export const ToastCustom = () => {
   const {top} = useSafeAreaInsets();
   return <Toast topOffset={top + 12} visibilityTime={8000} config={{ToastMessage}} />;
 };
@@ -49,7 +48,7 @@ export const ToastMessage = (params: ToastConfigParams<ToastMessageProps>) => {
       borderColor={textColor[status]}
       backgroundColor={bgIconToast[status]}>
       <Block row alignItems={text2 ? undefined : 'center'}>
-        <Image width={30} height={30} resizeMode="contain" source={iconToast[status]} />
+        <Image source={iconToast[status]} style={{width: 30, height: 30}} />
         <Block flex marginLeft={15}>
           {!!text1 && (
             <Text fontWeight={600} fontSize={16} color={textColor[status]}>
@@ -59,7 +58,7 @@ export const ToastMessage = (params: ToastConfigParams<ToastMessageProps>) => {
           {!!text2 && <Text color={textColor[status]}>{text2}</Text>}
         </Block>
         <Pressable contentCenter square={30} onPress={() => Toast.hide()}>
-          <Image source={{uri: ICONS.icClose}} width={16} height={16} tintColor={COLORS.textPrimary} />
+          <Image source={{uri: ICONS.icClose}} width={16} height={16} />
         </Pressable>
       </Block>
       {action && (

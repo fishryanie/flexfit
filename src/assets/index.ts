@@ -1,4 +1,7 @@
 export const ICONS = {
+  ic_faceId: require('./icons/init/ic_faceId.png'),
+  ic_fingerprint: require('./icons/init/ic_fingerprint.png'),
+
   ic_search: 'https://cdn-icons-png.flaticon.com/128/711/711319.png',
   ic_back: 'https://cdn-icons-png.flaticon.com/128/2732/2732652.png',
   ic_comment: 'https://cdn-icons-png.flaticon.com/128/2076/2076218.png',

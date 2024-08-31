@@ -31,8 +31,8 @@ export default function LoginScreen() {
   return (
     <Block flex paddingTop={top + 10} backgroundColor={COLORS.antiFlashWhite}>
       <Block flex justifyContent="flex-start">
-        <Text textAlign="center" fontWeight="semibold" fontSize={16}>
-          FIT MATE
+        <Text fontSize={14} fontWeight={500} textAlign="center" textTransform="uppercase" style={{letterSpacing: 5}}>
+          fitate
         </Text>
       </Block>
       <Text flex={1.5} fontWeight="bold" numberOfLines={2} paddingLeft={15} fontSize={55}>
@@ -42,7 +42,7 @@ export default function LoginScreen() {
       {/* {showFormLogin && <FormLogin control={control} />} */}
       <Block flex justifyContent="flex-end" paddingHorizontal={15} marginBottom={bottom + 10}>
         <Block row>
-          <Button flex radius={10} title={t('Login.buttonSubmit')} />
+          <Button flex title={t('Login.buttonSubmit')} />
           {/* {isBiometricSupported && account.isActiveBiometrics && (
             <Pressable square={50} padding={10} radius={15} marginLeft={10} backgroundColor={COLORS.dark}>
               <Image square="100%" source={ICONS.ic_faceId} />

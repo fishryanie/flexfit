@@ -1,6 +1,6 @@
 import {isNumber} from 'lodash';
 import {Dimensions} from 'react-native';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 
 export const DESIGN_WIDTH = 428;
 export const DESIGN_HEIGHT = 926;

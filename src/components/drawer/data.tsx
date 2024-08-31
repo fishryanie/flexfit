@@ -5,7 +5,7 @@ import {RootStackParamList} from 'types/routes';
 export type DrawerListType = {
   name: string;
   icon: React.ReactElement;
-  navigate: keyof RootStackParamList;
+  navigate?: keyof RootStackParamList;
 };
 
 export const drawerList: DrawerListType[] = [
@@ -18,5 +18,9 @@ export const drawerList: DrawerListType[] = [
     name: 'Settings',
     icon: <Icon type="Ionicons" name="settings-sharp" />,
     navigate: 'SettingScreen',
+  },
+  {
+    name: 'Logout',
+    icon: <Icon type="Ionicons" name="settings-sharp" />,
   },
 ];

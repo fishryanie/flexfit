@@ -3,7 +3,7 @@ import {ColorValue, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
 import {handleFlex, handleFlexBasis, handleFlexGrow, handleRound, handleSquare, hs} from 'themes/helper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {DEFAULT_STYLES} from 'themes/defaultStyles';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 
 export type BlockProps = ViewProps &
   Partial<{

@@ -9,6 +9,16 @@ export const PHONE_REGEX = /^(84|0)(3|5|7|8|9)([0-9]{8})$/;
 export const EMAIL_REGEX =
   /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
 
+/**
+ * - Sử dụng SKIP_TOKEN để ngừng hook request api mà ko cần truyền undefined,false
+ * @example
+ * ```
+ * ❌useGetData(undefined,false)
+ * ✅useGetData(SKIP_TOKEN)
+ * ```
+ */
+export const SKIP_TOKEN = 'SKIP_TOKEN' as any;
+
 export const APP_INFO = {
   androidBundleId: 'com.ims.sky',
   iosBundleId: 'com.imsvietnamese.sky',

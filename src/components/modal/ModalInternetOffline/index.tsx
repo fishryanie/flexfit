@@ -4,7 +4,7 @@ import {saveDeviceIp} from 'stores/other/slice';
 import {Block, Text} from 'components/base';
 import {useAppDispatch} from 'hooks/redux';
 import {getDeviceIp} from 'utils/helper';
-import {Timeout} from 'types/common';
+import {Timeout} from 'types/shared';
 import {COLORS} from 'themes/color';
 
 export const ModalInternetOffline = () => {

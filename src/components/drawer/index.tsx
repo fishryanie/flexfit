@@ -21,6 +21,7 @@ import {navigationRef} from 'routers';
 import {COLORS} from 'themes/color';
 import {width} from 'themes/helper';
 import {DrawerListType, drawerList} from './data';
+import {useLogout} from 'stores/auth/apiHooks';
 
 type DrawerProps = {
   children: React.ReactElement;
@@ -32,6 +33,7 @@ export const Drawer = ({children}: DrawerProps) => {
   const active = useSharedValue(false);
   const isShowDrawer = useAppSelector(state => state.app.isShowDrawer);
   const insets = useSafeAreaInsets();
+  const {request: requestSignOut} = useLogout();
   const [theme, setTheme] = useState<string | null | undefined>(colorScheme);
   const [themeSwitch, setThemeSwitch] = useState<string>('system');
 
@@ -77,6 +79,9 @@ export const Drawer = ({children}: DrawerProps) => {
 
   const menuPress = (item: DrawerListType) => {
     closeDrawerHandler();
+    if (item.name === 'Logout') {
+      return requestSignOut();
+    }
     navigationRef.navigate(item.navigate as keyof RootStackParamList);
   };
 
@@ -106,12 +111,14 @@ export const Drawer = ({children}: DrawerProps) => {
             </Text>
           </Block>
           {drawerList.map((item, index) => (
-            <Pressable key={index} rowCenter paddingVertical={16} onPress={() => menuPress(item)}>
+            <Pressable key={index} gap={12} rowCenter paddingVertical={16} onPress={() => menuPress(item)}>
+              {item.icon}
               <Text fontWeight="bold" fontSize={16} color="white">
                 {item.name}
               </Text>
             </Pressable>
           ))}
+
           <ButtonDarkMode setTheme={setTheme} theme={theme} setThemeSwitch={setThemeSwitch} themeSwitch={themeSwitch} />
         </Block>
         <Text

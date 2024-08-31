@@ -2,7 +2,7 @@ import React, {Ref, forwardRef, useCallback, useRef} from 'react';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {handleFlex, handleRound, handleSquare, hs} from 'themes/helper';
 import {DEFAULT_STYLES} from 'themes/defaultStyles';
-import {Size} from 'types/common';
+import {Size} from 'types/shared';
 import {
   ColorValue,
   GestureResponderEvent,

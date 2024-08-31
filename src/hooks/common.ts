@@ -16,18 +16,20 @@ export const useDeepCompareEffect = (callback: EffectCallback, dependencies: Dep
 };
 
 export const useFCMToken = () => {
-  const [tokenApp, setTokenApp] = useState<string | undefined>();
+  const [deviceToken, setDeviceToken] = useState<string | undefined>();
   useEffect(() => {
-    messaging().getToken().then(setTokenApp);
-    const unSubscribe = messaging().onTokenRefresh(setTokenApp);
+    messaging()
+      .getToken()
+      .then(token => {
+        setDeviceToken(token);
+        if (__DEV__) {
+          console.log('DEVICE_TOKEN', token);
+        }
+      });
+    const unSubscribe = messaging().onTokenRefresh(setDeviceToken);
     return () => {
       unSubscribe();
     };
   }, []);
-  useEffect(() => {
-    if (__DEV__) {
-      console.log('DEVICE_TOKEN', tokenApp);
-    }
-  }, [tokenApp]);
-  return tokenApp;
+  return deviceToken;
 };
